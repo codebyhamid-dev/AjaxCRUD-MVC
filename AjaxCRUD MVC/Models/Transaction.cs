@@ -17,6 +17,6 @@ namespace AjaxCRUD_MVC.Models
         [Column(TypeName = "nvarchar(20)")]
         public string SwiftCode { get; set; }
         public decimal Amount { get; set; }
-        public DateTime Date { get; set; }= DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }
