@@ -20,9 +20,17 @@ namespace AjaxCRUD_MVC.Controllers
         }
 
         // GET: Transaction
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Transactions.ToListAsync());
+            var transactions = await _context.Transactions.OrderByDescending(t => t.Date).ToListAsync();
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_TransactionListPartial", transactions);
+            }
+
+            return View(transactions);
         }
 
         // GET: Transaction/Details/5
@@ -60,9 +68,27 @@ namespace AjaxCRUD_MVC.Controllers
             {
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Get updated transactions list
+                var transactions = await _context.Transactions.ToListAsync();
+
+                // Render partial view instead of full Index
+                var html = Helper.RenderRazorViewToString(this, "_TransactionListPartial", transactions);
+
+                return Json(new
+                {
+                    isValid = true,
+                    html = html
+                });
             }
-            return View(transaction);
+
+            // Return the Create view HTML with validation errors
+            var invalidHtml = Helper.RenderRazorViewToString(this, "Create", transaction);
+            return Json(new
+            {
+                isValid = false,
+                html = invalidHtml
+            });
         }
 
         // GET: Transaction/Edit/5

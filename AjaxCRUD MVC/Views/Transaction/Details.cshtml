@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = null;
 }
 
 <h2 class="mb-3">
@@ -49,7 +50,9 @@
                 </div>
 
 
-                <a asp-action="Index" class="btn btn-secondary">
+                <a href="javascript:void(0);"
+                   class="btn btn-secondary"
+                   onclick="BackToListAjax('@Url.Action("Index", "Transaction")')">
                     <i class="fa-solid fa-arrow-left"></i> Back to List
                 </a>
 
