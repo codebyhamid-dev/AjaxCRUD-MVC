@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
 <h2 class="mb-3">
@@ -15,7 +16,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
 
-                <form asp-action="Edit">
+                <form asp-action="Edit" onsubmit="return jQueryAjaxPost(this)">
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <input type="hidden" asp-for="Id" />
@@ -67,7 +68,9 @@
                             <i class="fa-solid fa-pen-to-square"></i> Save Changes
                         </button>
 
-                        <a asp-action="Index" class="btn btn-secondary">
+                        <a href="javascript:void(0);"
+                           class="btn btn-secondary"
+                           onclick="BackToListAjax('@Url.Action("Index", "Transaction")')">
                             <i class="fa-solid fa-arrow-left"></i> Back to List
                         </a>
                     </div>

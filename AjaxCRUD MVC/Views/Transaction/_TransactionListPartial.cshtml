@@ -29,10 +29,10 @@
                     <a onclick="ShowInPopup('@Url.Action("Details", "Transaction", new { id = item.Id })','Transaction Details')" class="btn btn-sm btn-info">
                         <i class="fa fa-info-circle"></i> Details
                     </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                    <a onclick="ShowInPopup('@Url.Action("Edit", "Transaction", new { id = item.Id })','Edit Transaction')" class="btn btn-sm btn-primary">
                         <i class="fa fa-edit"></i> Edit
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                    <a onclick="ShowInPopup('@Url.Action("Delete", "Transaction", new { id = item.Id })','Delete Transaction')" class="btn btn-sm btn-danger">
                         <i class="fa fa-trash"></i> Delete
                     </a>
                 </td>

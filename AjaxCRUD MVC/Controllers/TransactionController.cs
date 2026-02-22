@@ -70,7 +70,7 @@ namespace AjaxCRUD_MVC.Controllers
                 await _context.SaveChangesAsync();
 
                 // Get updated transactions list
-                var transactions = await _context.Transactions.ToListAsync();
+                var transactions = await _context.Transactions.OrderByDescending(t => t.Date).ToListAsync();
 
                 // Render partial view instead of full Index
                 var html = Helper.RenderRazorViewToString(this, "_TransactionListPartial", transactions);
@@ -137,9 +137,25 @@ namespace AjaxCRUD_MVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                // Get updated transactions list
+                var transactions = await _context.Transactions.OrderByDescending(t => t.Date).ToListAsync();
+
+                // Render partial view instead of full Index
+                var html = Helper.RenderRazorViewToString(this, "_TransactionListPartial", transactions);
+
+                return Json(new
+                {
+                    isValid = true,
+                    html = html
+                });
             }
-            return View(transaction);
+            // Return the Create view HTML with validation errors
+            var invalidHtml = Helper.RenderRazorViewToString(this, "Edit", transaction);
+            return Json(new
+            {
+                isValid = false,
+                html = invalidHtml
+            });
         }
 
         // GET: Transaction/Delete/5
@@ -166,13 +182,24 @@ namespace AjaxCRUD_MVC.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
+
             if (transaction != null)
             {
                 _context.Transactions.Remove(transaction);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var transactions = await _context.Transactions
+                .OrderByDescending(t => t.Date)
+                .ToListAsync();
+
+            var html = Helper.RenderRazorViewToString(this, "_TransactionListPartial", transactions);
+
+            return Json(new
+            {
+                isValid = true,
+                html = html
+            });
         }
 
         private bool TransactionExists(int id)

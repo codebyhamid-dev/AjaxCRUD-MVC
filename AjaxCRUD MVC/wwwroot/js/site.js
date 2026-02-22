@@ -1,4 +1,5 @@
-﻿ShowInPopup = (url, title) => {
+﻿//Show Models in Popup
+ShowInPopup = (url, title) => {
     $.ajax({
         type: "GET",
         url: url,
@@ -9,6 +10,7 @@
         }
     });
 }
+//Submit Forms via AJAX In Post and Update
 const jQueryAjaxPost = (form) => {
     try {
         $.ajax({
@@ -44,6 +46,7 @@ const jQueryAjaxPost = (form) => {
     return false;
 };
 
+//Rediect to List after CruD Operations
 BackToListAjax = (url) => {
     $.ajax({
         type: "GET",
@@ -63,3 +66,33 @@ BackToListAjax = (url) => {
         }
     });
 };
+//Delete Transaction with Confirmation
+function jQueryAjaxDelete(form) {
+
+    if (!confirm("Are you sure you want to delete this transaction?"))
+        return false;
+
+    $.ajax({
+        type: "POST",
+        url: form.action,
+        data: $(form).serialize(),
+
+        success: function (res) {
+
+            if (res.isValid) {
+
+                // Update table
+                $("#transaction-list").html(res.html);
+
+                // Close modal
+                $("#form-modal").modal("hide");
+            }
+        },
+        error: function (err) {
+            console.log(err);
+            alert("Delete failed");
+        }
+    });
+
+    return false; // stop normal submit
+}
