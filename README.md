@@ -25,7 +25,7 @@ The app provides a smooth user experience using **jQuery AJAX**, **Entity Framew
 - **SQL Server**
 - **jQuery AJAX**
 - **Bootstrap 5**
-- **Font Awesome**
+- **Font Awesome Icons**
 
 ---
 
@@ -82,3 +82,18 @@ This project eliminates traditional page reloads by using:
 3. AJAX POST request sent  
 4. Record removed from database  
 5. Updated list returned via JSON  
+
+### **Project Flow**
+<img width="313" height="637" alt="image" src="https://github.com/user-attachments/assets/1d4f6a39-d76f-4f88-bc84-7cf697ad9d72" />
+
+### **UI**
+<img width="1114" height="377" alt="image" src="https://github.com/user-attachments/assets/2141c0a3-5e3e-4854-bf1e-6a7364ffbe56" />
+<img width="689" height="612" alt="image" src="https://github.com/user-attachments/assets/a14f50e6-b6ca-4f15-b0aa-483e9483c57c" />
+<img width="823" height="473" alt="image" src="https://github.com/user-attachments/assets/8ce5f3af-7b82-4453-88cb-e79559aabe78" />
+<img width="666" height="523" alt="image" src="https://github.com/user-attachments/assets/e6a22be3-2166-4fd7-ae25-78ad16a920e1" />
+<img width="686" height="531" alt="image" src="https://github.com/user-attachments/assets/f82b0832-d58f-4c36-bc92-f18acbdcdf3f" />
+
+
+
+
+
